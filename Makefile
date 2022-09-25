@@ -12,7 +12,7 @@ CYAN  =\033[0;36m
 RESET =\033[0m
 
 ### Set information about our C++ compiler
-LANGUAGE ?= C
+LANGUAGE?=C
 ifeq ($(LANGUAGE), CPP)
 	CC = g++
 	SOURCE_SUFFIX = .cpp
@@ -31,7 +31,7 @@ CFLAGS = -Wall -O3
 ### Compile targets
 SOURCES := $(notdir $(wildcard src/*$(SOURCE_SUFFIX)))
 OBJECTS  = $(SOURCES:$(SOURCE_SUFFIX)=.o)
-TARGETS  = $(notdir $(wildcard tests/*$(SOURCE_SUFFIX)))
+TARGETS  = $(basename $(notdir $(wildcard tests/*$(SOURCE_SUFFIX))))
 
 all : $(TARGETS) end
 
@@ -63,9 +63,9 @@ $(OBJECTS) :
 	@$(CC) $(CFLAGS) -c -o $(objectfile) $(sourcefile) -Iinclude
 
 $(TARGETS) : intro build $(OBJECTS)
-	$(eval testfile=$(addprefix tests/,$@))
-	$(eval object=$(addprefix build/,$(@:$(SOURCE_SUFFIX)=.o)))
-	$(eval binary=$(basename $(object)))
+	$(eval testfile=$(addprefix tests/,$(addsuffix $(SOURCE_SUFFIX),$@)))
+	$(eval object=$(addprefix build/,$(addsuffix .o,$@)))
+	$(eval binary=$(addprefix build/,$@))
 	@echo -e "${ORANGE} - Building executable: $@${RESET}"
 	@$(CC) $(CFLAGS) -c -o $(object) $(testfile) -Iinclude
 	@$(CC) $(CFLAGS) $(LDFLAGS) -o $(binary) $(addprefix build/,$(OBJECTS)) $(object)
