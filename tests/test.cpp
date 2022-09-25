@@ -1,4 +1,4 @@
-#include "adder.h"
+#include "adder.hpp"
 #include <assert.h>
 
 void test_add() {
