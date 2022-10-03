@@ -6,21 +6,17 @@
 #ifndef Matrix_H
 #define Matrix_H
 
-#include "Matrix.cpp"
 
-class Matrix {
-    
-    public: 
-        // constructor and deconstructor 
-        Matrix();
-        ~Matrix();
+typedef struct {
+    int ncols;
+    int nrows;
+} Matrix;
 
-        // methods
-        Matrix inverse();
+// constructor and deconstructor 
+void matrixConstruct();
+void matrixDestruct();
 
-    private:
-        int ncols;
-        int nrows;
-};
+// methods
+Matrix inverse();
 
 #endif

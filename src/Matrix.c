@@ -3,14 +3,22 @@
 //========================================================================
 // Implementation of Matrix. 
 
-#include "Matrix.hpp"
+#include "Matrix.h"
 
 //------------------------------------------------------------------------
-// Matrix
+// matrixConstruct
 //------------------------------------------------------------------------
 // Matrix Constructor.
 // Constructs a Matrix object. 
-Matrix::Matrix() {
+void matrixConstruct() {
 
 }
 
+//------------------------------------------------------------------------
+// matrixDestruct
+//------------------------------------------------------------------------
+// Matrix Destructor.
+// Constructs a Matrix object. 
+void matrixDestruct() {
+
+}
