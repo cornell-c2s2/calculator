@@ -6,6 +6,13 @@
 #ifndef InputParser_H
 #define InputParser_H
 
+#include "InputParser.cpp"
 
-// TODO: make methods 
+class InputParser {
+    public: 
+        // public methods 
+    private:
+        // private methods
+};
+
 #endif

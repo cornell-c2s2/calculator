@@ -6,19 +6,11 @@
 #include "Matrix.h"
 
 //------------------------------------------------------------------------
-// matrixConstruct
+// Matrix
 //------------------------------------------------------------------------
 // Matrix Constructor.
 // Constructs a Matrix object. 
-void matrixConstruct() {
+Matrix::Matrix() {
 
 }
 
-//------------------------------------------------------------------------
-// matrixDestruct
-//------------------------------------------------------------------------
-// Matrix Destructor.
-// Constructs a Matrix object. 
-void matrixDestruct() {
-
-}

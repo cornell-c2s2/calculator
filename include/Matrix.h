@@ -7,16 +7,19 @@
 #define Matrix_H
 
 
-typedef struct {
-    int ncols;
-    int nrows;
-} Matrix;
+class Matrix {
+    
+    public: 
+        // constructor and deconstructor 
+        Matrix();
+        ~Matrix();
 
-// constructor and deconstructor 
-void matrixConstruct();
-void matrixDestruct();
+        // methods
+        Matrix inverse();
 
-// methods
-Matrix inverse();
+    private:
+        int ncols;
+        int nrows;
+};
 
 #endif
