@@ -18,3 +18,5 @@ __pycache__/
 *~
 .lock*
 *.swp
+inputparser
+mainrunner
