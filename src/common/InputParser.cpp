@@ -10,7 +10,7 @@ using namespace std;
 // True if the string is a valid number, otherwise false.
 // TODO: negative numbers, decimals
 bool check_number(string num) {
-    for (int i = 0; i < num.length(); i++) {
+    for (size_t i = 0; i < num.length(); i++) {
         if (!isdigit(num[i])) {
             return false;
         }
