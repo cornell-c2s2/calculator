@@ -10,6 +10,8 @@ int add(int input1, int input2);
 int subtract();
 int multiply();
 int divide();
-int squareRoot();
+
+//Function to find the square root of n
+void findSqrt(double input);
 
 #endif
