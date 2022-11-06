@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <InputParser.h>
 using namespace std;
 
 // True if the string is a valid number, otherwise false.

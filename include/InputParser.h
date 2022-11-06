@@ -6,13 +6,9 @@
 #ifndef InputParser_H
 #define InputParser_H
 
-#include "InputParser.cpp"
 
-class InputParser {
-    public: 
-        // public methods 
-    private:
-        // private methods
-};
+bool check_number(std::string num);
+void bop(std::string bop_arr[]);
+
 
 #endif

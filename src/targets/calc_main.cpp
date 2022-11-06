@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <cstring>
-#include "InputParser.cpp"
+#include <InputParser.h>
 using namespace std;
 
 int main() {
