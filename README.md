@@ -19,7 +19,7 @@ You'll know the virtual environment is active when your shell always starts with
 
 ### Running native
 
-```./.pio/build/native/program```
+```.pio/build/native/program```
 
 ### Compiling Arduino
 
