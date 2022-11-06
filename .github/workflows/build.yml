@@ -1,4 +1,4 @@
-name: Flight Software Regression Unit Tests
+name: Calculator Build Regression Tests
 
 on:
   push:
