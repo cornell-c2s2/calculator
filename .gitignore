@@ -22,3 +22,4 @@ inputparser
 mainrunner
 venv
 .pio*
+.vscode*
