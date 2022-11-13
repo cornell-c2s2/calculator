@@ -5,8 +5,8 @@
 .align 2
 .globl setLED
 
-.include "memory_map.inc"
-.include "gpio.inc"
+.include "riscv/memory_map.inc"
+.include "riscv/gpio.inc"
 
 .equ NOERROR,   0x00
 .equ ERROR,     0x01

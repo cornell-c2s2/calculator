@@ -5,8 +5,8 @@
 .align 2
 .globl setupGPIO
 
-.include "memory_map.inc"
-.include "gpio.inc"
+.include "riscv/memory_map.inc"
+.include "riscv/gpio.inc"
 
 setupGPIO:
     addi sp, sp, -16            # Allocate Stack Frame

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 // Copyright (c) 2018 Western Digital Corporation or its affiliates.
 
-#define DELAY       200
+#define DELAY       20
 #define ON          0x01
 #define OFF         0x00
 #define NUM_LEDS    0x03

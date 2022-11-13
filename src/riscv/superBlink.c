@@ -13,6 +13,8 @@ int main()
     setupGPIO();
 
     while(!error) {
+        printf("Hello, C2S2!\n");
+
         setLED(colors[ledNum], ON);
         delay(DELAY);
         error = setLED(colors[ledNum++], OFF);

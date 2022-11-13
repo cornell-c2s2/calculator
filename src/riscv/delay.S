@@ -5,7 +5,7 @@
 .align 2
 .globl delay
 
-.include "memory_map.inc"
+.include "riscv/memory_map.inc"
 
 # Our delay value in milliseconds passed into a0
 
