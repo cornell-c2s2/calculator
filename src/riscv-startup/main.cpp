@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <time.h>       //include Time library (might not need)?
+// #include <iostream>
 
 void delay(int number_of_microseconds) //not actually number of seconds
 {
@@ -40,8 +41,8 @@ int main() {
     printf("Get input: ");
     // getline(&buff_pointer, &buff_size, stdin);
     // printf(stdin);
-    // scanf("%19s", buffer);
-    // std::getline(stdin, test);
+    scanf("%19s", buffer);
+    // std::getline(std::cin, test);
     // printf(test.c_str());
     // printf("PREPRINT\n");
     // printf(test.c_str());

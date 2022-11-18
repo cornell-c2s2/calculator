@@ -4,7 +4,7 @@
 // board, executing out of SPI Flash at 0x20400000.
 
 #include <stdint.h>
-#include "platform.h"
+// #include "platform.h"
 
 #ifndef _SIFIVE_HIFIVE1_H
 #error "'led_fade' is designed to run on HiFive1 and/or E300 Arty Dev Kit."

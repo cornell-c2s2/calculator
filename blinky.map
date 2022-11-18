@@ -1807,12 +1807,6 @@ END GROUP
                 0x0000000008000000                PROVIDE (metal_segment_itim_target_start = ADDR (.itim))
                 0x0000000008000000                PROVIDE (metal_segment_itim_target_end = (ADDR (.itim) + SIZEOF (.itim)))
 
-.lim            0x0000000080000000        0x0 load address 0x0000000020010e00
- *(.lim .lim.*)
-                [!provide]                        PROVIDE (metal_segment_lim_source_start = LOADADDR (.lim))
-                [!provide]                        PROVIDE (metal_segment_lim_target_start = ADDR (.lim))
-                [!provide]                        PROVIDE (metal_segment_lim_target_end = (ADDR (.lim) + SIZEOF (.lim)))
-
 .text           0x0000000020010e00     0x4d80
  *(.text.unlikely .text.unlikely.*)
  *(.text.startup .text.startup.*)
