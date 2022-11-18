@@ -46,10 +46,10 @@ int main() {
 
   while(true) {
     delay(1000*100);
-    std::string test = "Finally\n";
+    // std::string test = "Finally\n";
     // std::vector<char> foo{80};
     // const char[] chars = {foo[0]};
-    printf("Get input: ");
+    printf("Got input: ");
     // getline(&buff_pointer, &buff_size, stdin);
     // printf(stdin);
     // scanf("%19s", buffer);
@@ -58,6 +58,8 @@ int main() {
     uint32_t regval = *reg;
     if (!(regval & (1<<31))){
       buffer[0] = (char)((regval) & 0xff);
+      buffer[1] = 0x00;
+
     } else {
       buffer[0] = 0x00;
       // break;
@@ -67,8 +69,8 @@ int main() {
     // printf(test.c_str());
     // printf("PREPRINT\n");
     // printf(test.c_str());
-    printf("buffer: %s", buffer);
-    printf("aESTING\n");
+    printf("%s\n", buffer);
+    // printf("aESTING\n");
     // std::cout << "FOO" << std::endl;
   }
 }
