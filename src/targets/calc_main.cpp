@@ -7,20 +7,49 @@
 // Will print nothing if input is bad
 
 #include <iostream>
-#include <cstring>
+#include <string>
 #include "CalcInput.h"
 using namespace std;
 
-// get_msg() function
+bool check_msg(string input) {
+  // Returns true if user input is valid, false otherwise
+  // Valid inputs require spaces (ex: 5 + 5 vs 5+5)
+
+  // non-serial
+  string::size_type input_s = input.find(" ");
+  return input_s < input.length();
+
+
+  // serial
+
+
+}
 
 
 // print_msg() function
 
+void print_msg(string output) {
+  // Prints out the output for both platforms
+
+  // non-serial
+  cout << "> " << output << "\n";
+
+  // serial
+
+}
+
 
 int main() {
   // Main loop
+
   while (true) {
-    string output = calcInput("");
-    return 0;
+    cout << "> "; // Enter calculation
+    string input;
+    getline(cin, input);
+    if (check_msg(input)) {
+      string output = calculateInput(input);
+      print_msg(output);
+    }
   }
+  return 0;
 }

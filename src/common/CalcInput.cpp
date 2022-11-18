@@ -4,8 +4,10 @@
 // Implements parsing inputs and calling correct math functions.
 
 #include <iostream>
-#include <cstring>
+#include <string>
 #include <CalcInput.h>
+#include <CalculatorFunctions.h>
+#include <vector>
 using namespace std;
 
 // True if the string is a valid number, otherwise false.
@@ -19,36 +21,52 @@ bool check_number(string num) {
     return true;
 }
 
-// Handles binary operations and prints output accordingly, or returns nothing when bad input occurs.
-void bop(string bop_arr[]) {
-    if (check_number(bop_arr[0]) && check_number(bop_arr[2])) {
-        int inp1 = stoi(bop_arr[0]);
-        int inp2 = stoi(bop_arr[2]);
-        string op = bop_arr[1];
-        if (op == "+") {
-            int res = inp1 + inp2;
-            cout << "> " << res << "\n";
-        }
-        else if (op == "-") {
-            int res = inp1 - inp2;
-            cout << "> " << res << "\n";
-        }
-        else if (op == "*") {
-            int res = inp1 * inp2;
-            cout << "> " << res << "\n";
-        }
-        else if (op == "/") {
-            int res = inp1 / inp2;
-            cout << "> " << res << "\n";
-        }
-        else {
-            throw invalid_argument("Bad input");
-        }
-
+int bop(vector<string> bop_vec) {
+    // Handles binary operations and prints output accordingly, or returns nothing when bad input occurs.
+    int inp1 = stoi(bop_vec.at(0));
+    int inp2 = stoi(bop_vec.at(2));
+    string op = bop_vec.at(1);
+    int res = 0;
+    if (op == "+") {
+        res = inp1 + inp2;
     }
+    else if (op == "-") {
+        res = inp1 - inp2;
+    }
+    else if (op == "*") {
+        res = inp1 * inp2;
+    }
+    else if (op == "/") {
+        res = inp1 / inp2;
+    }
+    else {
+        throw invalid_argument("Bad input");
+    }
+    return res;
 }
 
 
 string calculateInput(string input) {
-    return "";
+    int pos = input.find(" ");
+    string delim = " ";
+    vector<string> input_vec;
+
+    // put token in array
+    while ((pos = input.find(" ")) != string::npos) {
+        string token = input.substr(0, pos);
+        input_vec.push_back(token);
+        input.erase(0, pos + delim.length());
+    }
+    input_vec.push_back(input);
+
+    if (input_vec.size() == 3) {
+        // bop 
+        return to_string(bop(input_vec));
+    } 
+    else if (input_vec.at(0) == "sqrt") {
+        double num = stoi(input_vec.at(1)) * 1.0;
+        return to_string(findSqrt(num));
+    }
+
 }
+    
