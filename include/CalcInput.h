@@ -3,12 +3,9 @@
 //========================================================================
 // Declarations for InputParser. 
 
-#ifndef InputParser_H
-#define InputParser_H
+#ifndef CalcInput_H
+#define CalcInput_H
 
-
-bool check_number(std::string num);
-void bop(std::string bop_arr[]);
-
+std::string calcInput(std::string input);
 
 #endif

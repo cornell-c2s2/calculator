@@ -3,7 +3,7 @@
 //========================================================================
 // Implementations for Calculator.
 
-#include "Calculator.h"
+#include "CalculatorFunctions.h"
 
 // #include <bits/stdc++.h>
 #include <iomanip>
