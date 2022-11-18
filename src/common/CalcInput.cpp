@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <cstring>
-#include <InputParser.h>
+#include <CalcInput.h>
 using namespace std;
 
 // True if the string is a valid number, otherwise false.
@@ -46,4 +46,9 @@ void bop(string bop_arr[]) {
         }
 
     }
+}
+
+
+string calculateInput(string input) {
+    return "";
 }

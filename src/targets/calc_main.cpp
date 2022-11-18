@@ -8,40 +8,19 @@
 
 #include <iostream>
 #include <cstring>
-#include <InputParser.h>
+#include "CalcInput.h"
 using namespace std;
 
+// get_msg() function
+
+
+// print_msg() function
+
+
 int main() {
-  bool badInput = false;
-  bool quit = false;
-
-  cout << "Enter your input below:" << endl;
-
-  while (!badInput && !quit) {
-    cout << "> "; // Enter calculation
-    string input;
-    getline(cin, input);
-    cout << "\n";
-    char arr[input.length() + 1];
-    strcpy(arr, input.c_str());
-    char* tokens = strtok(arr, " ");
-
-    string bop_arr[3];
-
-    int idx = 0; // keeps track of which token we're on
-    while (tokens != NULL) {
-      if (strcmp(tokens, "quit") == 0) {
-        quit = true;
-      }
-      if (idx < 3) {
-        bop_arr[idx] = tokens;
-      }
-      tokens = strtok(NULL, " ");
-      idx++;
-    }
-
-    bop(bop_arr);
-    
+  // Main loop
+  while (true) {
+    string output = calcInput("");
+    return 0;
   }
-  return 0;
 }
