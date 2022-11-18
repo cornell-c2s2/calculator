@@ -10,6 +10,15 @@
 #include <string>
 #include <vector>
 
+// #include <metal/machine.h>
+#include <metal/machine/platform.h>
+
+// #include <metal/lock.h>
+// #include <metal/uart.h>
+// #include <metal/interrupt.h>
+// #include <metal/clock.h>
+// #include <metal/led.h>
+
 #include <time.h>       //include Time library (might not need)?
 // #include <iostream>
 
@@ -26,6 +35,8 @@ void delay(int number_of_microseconds) //not actually number of seconds
   
 }//end delay
 
+
+
 int main() {
   char buffer[20] = {};
   char * buff_pointer = &buffer[0];
@@ -41,7 +52,17 @@ int main() {
     printf("Get input: ");
     // getline(&buff_pointer, &buff_size, stdin);
     // printf(stdin);
-    scanf("%19s", buffer);
+    // scanf("%19s", buffer);
+
+    volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
+    uint32_t regval = *reg;
+    if (!(regval & (1<<31))){
+      buffer[0] = (char)((regval) & 0xff);
+    } else {
+      buffer[0] = 0x00;
+      // break;
+    }
+
     // std::getline(std::cin, test);
     // printf(test.c_str());
     // printf("PREPRINT\n");
