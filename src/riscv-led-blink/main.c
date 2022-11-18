@@ -5,6 +5,8 @@
 #include <metal/gpio.h> //include GPIO library, <https://sifive.github.io/freedom-metal-docs/apiref/gpio.html>
 //#define builtin_LED 5 //IC's GPIO = 5, pin silkscreen = 13, this line won't work, we need an integer...
 //custom write delay function since we do not have one like an Arduino
+// #include <string>
+
 void delay(int number_of_microseconds) //not actually number of seconds
 {
   // Converting time into multiples of a hundred nS
@@ -18,6 +20,7 @@ void delay(int number_of_microseconds) //not actually number of seconds
   
 }//end delay
 int main (void) {
+  // std::string foo;
   //make instance of GPIO
   struct metal_gpio *led0;
   //Note: The sequence of these commands matter!
