@@ -10,14 +10,6 @@
 #include <iostream>
 using namespace std;
 
-//------------------------------------------------------------------------
-// add
-//------------------------------------------------------------------------
-// adds two numbers and handles errors accordingly
-int add(int input1, int input2) {
-    return 0;
-}
-
 double Square(double n, double i, double j) {
   double mid = (i + j) / 2;
   double mul = mid * mid;
@@ -36,23 +28,25 @@ double Square(double n, double i, double j) {
 }
 
 // Function to find the square root of n
-void findSqrt(double n) {
+double findSqrt(double n) {
   double i = 1;
-
+  double res;
   // While the square root is not found
   bool found = false;
   while (!found) {
     // If n is a perfect square
     if (i * i == n) {
-      cout << fixed << setprecision(0) << i;
+      // cout << fixed << setprecision(0) << i;
       found = true;
+      res = i;
     } else if (i * i > n) {
 
       // Square root will lie in the interval i-1 and i
-      double res = Square(n, i - 1, i);
-      cout << fixed << setprecision(5) << res;
+      res = Square(n, i - 1, i);
+      // cout << fixed << setprecision(5) << res;
       found = true;
     }
     i++;
   }
+  return res;
 }
