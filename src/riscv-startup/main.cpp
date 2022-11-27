@@ -22,6 +22,7 @@
 
 #include <time.h>       //include Time library (might not need)?
 // #include <iostream>
+#include <RingBuffer.h>
 
 void delay(int number_of_microseconds) //not actually number of seconds
 {
@@ -59,7 +60,7 @@ int main() {
 
 
   while(true) {
-    delay(1000*10);
+    delay(1000*100);
     // std::string test = "Finally\n";
     // std::vector<char> foo{80};
     // const char[] chars = {foo[0]};
@@ -68,26 +69,26 @@ int main() {
     // printf(stdin);
     // scanf("%19s", buffer);
 
-    int read_int = 0;
-    if( metal_tty_getc(&read_int) == 0) {
-      buffer[0] = (char)(read_int);
-      buffer[1] = 0x00;
-
-    } else {
-      buffer[0] = 0x00;
-      // break;
-    }
-
-    // volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
-    // uint32_t regval = *reg;
-    // if (!(regval & (1<<31))){
-    //   buffer[0] = (char)((regval) & 0xff);
+    // int read_int = 0;
+    // if( metal_tty_getc(&read_int) == 0) {
+    //   buffer[0] = (char)(read_int);
     //   buffer[1] = 0x00;
 
     // } else {
     //   buffer[0] = 0x00;
     //   // break;
     // }
+
+    volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
+    uint32_t regval = *reg;
+    if (!(regval & (1<<31))){
+      buffer[0] = (char)((regval) & 0xff);
+      buffer[1] = 0x00;
+
+    } else {
+      buffer[0] = 0x00;
+      // break;
+    }
 
     // std::getline(std::cin, test);
     // printf(test.c_str());
