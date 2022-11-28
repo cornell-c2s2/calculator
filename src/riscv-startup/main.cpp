@@ -37,7 +37,50 @@ void delay(int number_of_microseconds) //not actually number of seconds
   
 }//end delay
 
+class HiFiveUart {
+  char buffer[1024];
+ 
+  public:
+  HiFiveUart();
+  char get_char();
+  std::string get_line();
+};
 
+HiFiveUart::HiFiveUart() {};
+
+char HiFiveUart::get_char() {
+  volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
+  uint32_t regval = *reg;
+  char regval_c = (char)regval;
+
+  return regval_c;
+}
+
+std::string HiFiveUart::get_line() {
+  return std::string("FOO");
+
+  size_t ptr = 0;
+  
+  while( true ) {
+    if ( ptr == 1024 ) {
+      break;
+    }
+    
+    char c = get_char();
+
+    if ( c != 0 ) {
+      buffer[ptr] = c;
+      ptr++;
+    }
+
+    if ( c == '\n' ) {
+      break;
+    }
+  }
+
+  // return std::string("Foo");
+  // return std::string(buffer, ptr);
+};
 
 int main() {
   char buffer[20] = {};
@@ -58,13 +101,14 @@ int main() {
     #endif
   }
 
-
+  HiFiveUart uart = HiFiveUart();
+  
   while(true) {
-    delay(1000*100);
+    // delay(1000*1);
     // std::string test = "Finally\n";
     // std::vector<char> foo{80};
     // const char[] chars = {foo[0]};
-    printf("Got input: ");
+    // printf("Got input: ");
     // getline(&buff_pointer, &buff_size, stdin);
     // printf(stdin);
     // scanf("%19s", buffer);
@@ -79,22 +123,26 @@ int main() {
     //   // break;
     // }
 
-    volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
-    uint32_t regval = *reg;
-    if (!(regval & (1<<31))){
-      buffer[0] = (char)((regval) & 0xff);
-      buffer[1] = 0x00;
+    // volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
+    // uint32_t regval = *reg;
+    // if (!(regval & (1<<31))){
+    //   buffer[0] = (char)((regval) & 0xff);
+    //   buffer[1] = 0x00;
 
-    } else {
-      buffer[0] = 0x00;
-      // break;
-    }
+    // } else {
+    //   buffer[0] = 0x00;
+    //   // break;
+    // }
 
     // std::getline(std::cin, test);
     // printf(test.c_str());
     // printf("PREPRINT\n");
     // printf(test.c_str());
-    printf("%s\n", buffer);
+    // std::string line = uart.get_line();
+    // std::string line = "foo";
+    // printf("%s", line.c_str());
+    // fflush(stdout);
+  
     // printf("aESTING\n");
     // std::cout << "FOO" << std::endl;
   }
