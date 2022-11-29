@@ -56,31 +56,37 @@ char HiFiveUart::get_char() {
   return regval_c;
 }
 
-std::string HiFiveUart::get_line() {
-  return std::string("FOO");
+// std::string HiFiveUart::get_line() {
+//   std::string temp = "foo2";
+//   return temp;
 
-  size_t ptr = 0;
+//   size_t ptr = 0;
   
-  while( true ) {
-    if ( ptr == 1024 ) {
-      break;
-    }
-    
-    char c = get_char();
+//   // while( true ) {
+//   //   if ( ptr == 1024 ) {
+//   //     break;
+//   //   }
 
-    if ( c != 0 ) {
-      buffer[ptr] = c;
-      ptr++;
-    }
+//   //   char c = '0';    
+//   //   // char c = get_char();
 
-    if ( c == '\n' ) {
-      break;
-    }
-  }
+//   //   if ( c != 0 ) {
+//   //     buffer[ptr] = c;
+//   //     ptr++;
+//   //   }
 
-  // return std::string("Foo");
-  // return std::string(buffer, ptr);
-};
+//   //   if ( c == '\n' ) {
+//   //     break;
+//   //   }
+//   // }
+
+//   // return std::string("Foo");
+//   // return std::string(buffer, ptr);
+// };
+
+// void return_foo(std::string& ref) {
+//   // ref = "asdf";
+// }
 
 int main() {
   char buffer[20] = {};
@@ -88,7 +94,7 @@ int main() {
   size_t buff_size = 20;
 
   // for(size_t i = 0;)
-  for(int i = 0; i < 5; i++) {
+  for(int i = 0; i < 6; i++) {
     delay(1000*100);
     printf("Initialization\n");
 
@@ -104,7 +110,7 @@ int main() {
   HiFiveUart uart = HiFiveUart();
   
   while(true) {
-    // delay(1000*1);
+    delay(1000*1);
     // std::string test = "Finally\n";
     // std::vector<char> foo{80};
     // const char[] chars = {foo[0]};
@@ -138,10 +144,10 @@ int main() {
     // printf(test.c_str());
     // printf("PREPRINT\n");
     // printf(test.c_str());
-    // std::string line = uart.get_line();
-    // std::string line = "foo";
-    // printf("%s", line.c_str());
-    // fflush(stdout);
+    // std::string line = return_foo();
+    std::string line = "foo";
+    printf("%s", line.c_str());
+    fflush(stdout);
   
     // printf("aESTING\n");
     // std::cout << "FOO" << std::endl;
