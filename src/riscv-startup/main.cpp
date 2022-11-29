@@ -94,7 +94,10 @@ int main() {
     delay(1000*1);
     char line_buf[BUFF_SIZE] = {};
     read_line(line_buf, BUFF_SIZE - 1);
+    printf("Got line: ");
     printf("%s", line_buf);
+    bad_function();
+    // printf("WHAT THE FUCK%s", bad_function().c_str());
     fflush(stdout);
   
     // printf("aESTING\n");
