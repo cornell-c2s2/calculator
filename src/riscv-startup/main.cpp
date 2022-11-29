@@ -21,7 +21,7 @@
 #include <time.h>       //include Time library (might not need)?
 // #include <iostream>
 // #include <RingBuffer.h>
-#define BUFF_SIZE 32
+#define BUFF_SIZE 128
 
 void delay(int number_of_microseconds) //not actually number of seconds
 {
@@ -36,12 +36,19 @@ void delay(int number_of_microseconds) //not actually number of seconds
   
 }//end delay
 
-char get_char() {
-  volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
-  uint32_t regval = *reg;
-  char regval_c = (char)regval;
+char read_char() {
+  while ( true ) {
+    volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
+    uint32_t regval = *reg;
 
-  return regval_c;
+    if (!(regval & (1<<31))){
+      char ret_val = (char)((regval) & 0xff);
+      printf("%c", ret_val);
+      fflush(stdout);
+      return ret_val;
+    }
+  }
+
 }
 
 void read_line(char * buffer, size_t n) {
@@ -56,14 +63,16 @@ void read_line(char * buffer, size_t n) {
       break;
     }
 
-    char c = get_char();
+    char c = read_char();
+
     if (c != 0 ) {
-      printf("Got char: %c", c);
+      // printf("Got char: %c\n", c);
       buffer[size] = c;
       size++;
     }
 
     if (c == '\n'){
+      buffer[size] = '\0';
       break;
     }
   }
@@ -75,28 +84,16 @@ void read_line(char * buffer, size_t n) {
 // }
 
 int main() {
-  char buffer[20] = {};
-  // char * buff_pointer = &buffer[0];
-  // size_t buff_size = 20;
 
-  // for(size_t i = 0;)
-  for(int i = 0; i < 6; i++) {
+  for(int i = 0; i < 3; i++) {
     delay(1000*100);
     printf("Initialization\n");
-
-    #ifdef __METAL_DT_STDOUT_UART_HANDLE
-    printf("stdoutdef\n");
-    #endif
-
-    #ifdef FOOBAR
-    printf(FOOBAR);
-    #endif
   }
   
   while(true) {
     delay(1000*1);
-    char line_buf[BUFF_SIZE];
-    read_line(line_buf, BUFF_SIZE);
+    char line_buf[BUFF_SIZE] = {};
+    read_line(line_buf, BUFF_SIZE - 1);
     printf("%s", line_buf);
     fflush(stdout);
   
