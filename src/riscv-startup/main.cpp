@@ -7,8 +7,6 @@
 // #include <vector>
 // #include <iostream>
 // void* __dso_handle;
-#include <string>
-#include <vector>
 
 // #include <metal/machine.h>
 #include <metal/machine/platform.h>
@@ -22,7 +20,8 @@
 
 #include <time.h>       //include Time library (might not need)?
 // #include <iostream>
-#include <RingBuffer.h>
+// #include <RingBuffer.h>
+#define BUFF_SIZE 128
 
 void delay(int number_of_microseconds) //not actually number of seconds
 {
@@ -37,116 +36,68 @@ void delay(int number_of_microseconds) //not actually number of seconds
   
 }//end delay
 
-class HiFiveUart {
-  char buffer[1024];
- 
-  public:
-  HiFiveUart();
-  char get_char();
-  std::string get_line();
-};
+char read_char() {
+  while ( true ) {
+    volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
+    uint32_t regval = *reg;
 
-HiFiveUart::HiFiveUart() {};
+    if (!(regval & (1<<31))){
+      char ret_val = (char)((regval) & 0xff);
+      printf("%c", ret_val);
+      fflush(stdout);
+      return ret_val;
+    }
+  }
 
-char HiFiveUart::get_char() {
-  volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
-  uint32_t regval = *reg;
-  char regval_c = (char)regval;
-
-  return regval_c;
 }
 
-// std::string HiFiveUart::get_line() {
-//   std::string temp = "foo2";
-//   return temp;
+void read_line(char * buffer, size_t n) {
 
-//   size_t ptr = 0;
-  
-//   // while( true ) {
-//   //   if ( ptr == 1024 ) {
-//   //     break;
-//   //   }
+  // int i = 0;
+  // char buffer[1024];
+  size_t size = 0;
 
-//   //   char c = '0';    
-//   //   // char c = get_char();
+  while( true ) {
+    // printf("size: %u\n", size);
+    if( size >= n) {
+      break;
+    }
 
-//   //   if ( c != 0 ) {
-//   //     buffer[ptr] = c;
-//   //     ptr++;
-//   //   }
+    char c = read_char();
 
-//   //   if ( c == '\n' ) {
-//   //     break;
-//   //   }
-//   // }
+    if (c != 0 ) {
+      // printf("Got char: %c\n", c);
+      buffer[size] = c;
+      size++;
+    }
 
-//   // return std::string("Foo");
-//   // return std::string(buffer, ptr);
-// };
+    if (c == '\n'){
+      buffer[size] = '\0';
+      break;
+    }
+  }
+}
+
 
 // void return_foo(std::string& ref) {
 //   // ref = "asdf";
 // }
 
 int main() {
-  char buffer[20] = {};
-  char * buff_pointer = &buffer[0];
-  size_t buff_size = 20;
 
-  // for(size_t i = 0;)
-  for(int i = 0; i < 6; i++) {
+  for(int i = 0; i < 3; i++) {
     delay(1000*100);
     printf("Initialization\n");
-
-    #ifdef __METAL_DT_STDOUT_UART_HANDLE
-    printf("stdoutdef\n");
-    #endif
-
-    #ifdef FOOBAR
-    printf(FOOBAR);
-    #endif
   }
-
-  HiFiveUart uart = HiFiveUart();
   
   while(true) {
     delay(1000*1);
-    // std::string test = "Finally\n";
-    // std::vector<char> foo{80};
-    // const char[] chars = {foo[0]};
-    // printf("Got input: ");
-    // getline(&buff_pointer, &buff_size, stdin);
-    // printf(stdin);
-    // scanf("%19s", buffer);
-
-    // int read_int = 0;
-    // if( metal_tty_getc(&read_int) == 0) {
-    //   buffer[0] = (char)(read_int);
-    //   buffer[1] = 0x00;
-
-    // } else {
-    //   buffer[0] = 0x00;
-    //   // break;
-    // }
-
-    // volatile uint32_t *reg = (volatile uint32_t *)(METAL_SIFIVE_UART0_0_BASE_ADDRESS + METAL_SIFIVE_UART0_RXDATA);
-    // uint32_t regval = *reg;
-    // if (!(regval & (1<<31))){
-    //   buffer[0] = (char)((regval) & 0xff);
-    //   buffer[1] = 0x00;
-
-    // } else {
-    //   buffer[0] = 0x00;
-    //   // break;
-    // }
-
-    // std::getline(std::cin, test);
-    // printf(test.c_str());
-    // printf("PREPRINT\n");
-    // printf(test.c_str());
-    // std::string line = return_foo();
-    std::string line = "foo";
-    printf("%s", line.c_str());
+    char line_buf[BUFF_SIZE] = {};
+    read_line(line_buf, BUFF_SIZE - 1);
+    printf("Got line: ");
+    printf("%s", line_buf);
+    bad_function();
+    // printf("WHAT THE FUCK%s", bad_function().c_str());
     fflush(stdout);
   
     // printf("aESTING\n");
