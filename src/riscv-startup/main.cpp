@@ -9,6 +9,7 @@
 // void* __dso_handle;
 #include <string>
 #include <vector>
+#include <cstring>
 
 // #include <metal/machine.h>
 #include <metal/machine/platform.h>
@@ -43,7 +44,7 @@ class HiFiveUart {
   public:
   HiFiveUart();
   char get_char();
-  std::string get_line();
+  char * get_line();
 };
 
 HiFiveUart::HiFiveUart() {};
@@ -56,33 +57,42 @@ char HiFiveUart::get_char() {
   return regval_c;
 }
 
-// std::string HiFiveUart::get_line() {
-//   std::string temp = "foo2";
-//   return temp;
+char * HiFiveUart::get_line() {
 
-//   size_t ptr = 0;
+  int i = 0;
+  for( size_t size = 0; size < 1024; size++ ) {
+    // printf("size: %u\n", size);
+    char c = get_char();
+    // buffer[size] = c;
+  }
   
-//   // while( true ) {
-//   //   if ( ptr == 1024 ) {
-//   //     break;
-//   //   }
+  // while( true ) {
+  //   printf("size: %u\n", size);
+  //   if ( size == 1024 ) {
+  //     break;
+  //   }
 
-//   //   char c = '0';    
-//   //   // char c = get_char();
+  //   // char c = '0';    
+    char c = get_char();
 
-//   //   if ( c != 0 ) {
-//   //     buffer[ptr] = c;
-//   //     ptr++;
-//   //   }
+  //   if ( c != 0 ) {
+  //     buffer[size] = c;
+  //     size++;
+  //   }
 
-//   //   if ( c == '\n' ) {
-//   //     break;
-//   //   }
-//   // }
+  //   if ( c == '\n' ) {
+  //     break;
+  //   }
+  // }
 
-//   // return std::string("Foo");
-//   // return std::string(buffer, ptr);
-// };
+  char * ret = "asdf";
+  return ret;
+
+  // char * line_buf = (char*) malloc( size * sizeof(char) );
+  // std::memcpy(line_buf, &buffer, size);
+
+  // return line_buf;
+};
 
 // void return_foo(std::string& ref) {
 //   // ref = "asdf";
@@ -145,8 +155,10 @@ int main() {
     // printf("PREPRINT\n");
     // printf(test.c_str());
     // std::string line = return_foo();
-    std::string line = "foo";
-    printf("%s", line.c_str());
+    // std::string line = "foo";
+    char * line = uart.get_line();
+    // char * line = "uart";
+    printf("%s", line);
     fflush(stdout);
   
     // printf("aESTING\n");
