@@ -20,5 +20,11 @@ void setup()
 void loop()
 {
     // put your main code here, to run repeatedly:
-    execute();
+    int pin = 3;
+    if (digitalRead(pin) == HIGH) {
+        // current time?
+        Serial.write("");
+    }
+    
+    // execute();
 }
