@@ -28,9 +28,11 @@ void loop(void)
   /* Get a new sensor event */ 
   sensors_event_t event; 
   bno.getEvent(&event);
-  
   /* Display the floating point data */
-  Serial.print("X: ");
+  Serial.print("Time: ");
+  unsigned int time = millis();
+  Serial.print(time);
+  Serial.print("\tX: ");
   Serial.print(event.orientation.x, 4);
   Serial.print("\tY: ");
   Serial.print(event.orientation.y, 4);
