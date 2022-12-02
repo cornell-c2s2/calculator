@@ -4,7 +4,7 @@
 
 class IMUTask : ControlTask {
   public:
-  IMUTask();
+  IMUTask(SFR& sfr);
   void setup();
   void execute();
 };

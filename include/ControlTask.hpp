@@ -1,8 +1,11 @@
 #pragma once
 
+#include <StateFieldRegistry.hpp>
+
 class ControlTask {
   public:
-  ControlTask();
+  SFR& sfr_;
+  ControlTask(SFR& sfr);
   void setup();
   void execute();
 };

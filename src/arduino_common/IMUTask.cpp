@@ -1,7 +1,8 @@
 #include <IMUTask.hpp>
 #include <Arduino.h>
+#include <StateFieldRegistry.hpp>
 
-IMUTask::IMUTask() {
+IMUTask::IMUTask(SFR& sfr) : ControlTask(sfr) {
 
 };
 

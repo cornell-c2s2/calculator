@@ -1,8 +1,10 @@
 #include <MainControlLoop.hpp>
 #include <Arduino.h>
 
-MainControlLoop::MainControlLoop() :
-  imu_task() {
+MainControlLoop::MainControlLoop(SFR& sfr) :
+  ControlTask(sfr),
+  imu_task(sfr)
+  {
 };
 
 void MainControlLoop::setup() {

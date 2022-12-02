@@ -4,7 +4,8 @@
 void setup()
 {
   // put your setup code here, to run once:
-  MainControlLoop mcl = MainControlLoop();
+  SFR sfr = SFR();
+  MainControlLoop mcl = MainControlLoop(sfr);
   mcl.setup();
   mcl.execute();
 }

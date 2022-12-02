@@ -1,6 +1,6 @@
 #include <ControlTask.hpp>
 
-ControlTask::ControlTask() {
+ControlTask::ControlTask(SFR& sfr) : sfr_(sfr) {
 
 };
 
