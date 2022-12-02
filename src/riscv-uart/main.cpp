@@ -28,19 +28,33 @@ void delay(int number_of_microseconds) //not actually number of seconds
   
 }//end delay
 
+// struct metal_uart * uart0;
+
 int main() {
   char buffer[20] = {};
   char * buff_pointer = &buffer[0];
   size_t buff_size = 20;
 
+  // uart0 = metal_uart_get_device(0);
+  // metal_uart_init(uart0, 115200);
+
   // for(size_t i = 0;)
   for(int i = 0; i < 6; i++) {
     delay(1000*100);
     printf("Initialization\n");
+    int c = getchar();
+    printf("Got char: %c\n", c);
+    printf("Got char: %d\n", c);
+
   }
   
   while(true) {
     delay(1000*1);
+    printf("Main Loop\n");
+    int c = getchar();
+    printf("Got char: %c\n", c);
+    printf("Got char: %d\n", c);
 
+    putchar('A');
   }
 }
