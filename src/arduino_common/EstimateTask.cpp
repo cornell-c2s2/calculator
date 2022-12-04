@@ -1,14 +1,14 @@
-#include <IMUTask.hpp>
+#include <EstimateTask.hpp>
 #include <Arduino.h>
 #include <StateFieldRegistry.hpp>
 
-IMUTask::IMUTask(SFR& sfr) : ControlTask(sfr) {
+EstimateTask::EstimateTask(SFR& sfr) : ControlTask(sfr) {
   bno = Adafruit_BNO055(55);
 };
 
-void IMUTask::setup() {
+void EstimateTask::setup() {
   // this code runs once
-  Serial.println("IMU Task Setup");
+  Serial.println("Estimate Task Setup");
   Serial.println("Orientation Sensor Test"); Serial.println("");
   /* Initialise the sensor */
   if(!bno.begin())
@@ -22,9 +22,9 @@ void IMUTask::setup() {
   bno.setExtCrystalUse(true);
 };
 
-void IMUTask::execute() {
+void EstimateTask::execute() {
   // this code runs repeatedly
-  Serial.println("IMU Task Execute");
+  Serial.println("Estimate Task Execute");
 
   /* Get a new sensor event */ 
   sensors_event_t event; 
@@ -44,10 +44,6 @@ void IMUTask::execute() {
   sfr_.imu_orientation[0] = event.orientation.x;
   sfr_.imu_orientation[1] = event.orientation.y;
   sfr_.imu_orientation[2] = event.orientation.z;
-
-  sfr_.imu_acceleration[0] = event.acceleration.x;
-  sfr_.imu_acceleration[1] = event.acceleration.y;
-  sfr_.imu_acceleration[2] = event.acceleration.z;
   
   delay(100);
 };

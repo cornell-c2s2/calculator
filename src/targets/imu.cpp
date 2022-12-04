@@ -39,6 +39,16 @@ void loop(void)
   Serial.print("\tZ: ");
   Serial.print(event.orientation.z, 4);
   Serial.println("");
+
+  imu::Vector<3> acceleration = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
   
+  /* Display the floating point data */
+  Serial.print("X: ");
+  Serial.print(acceleration.x());
+  Serial.print("\tY: ");
+  Serial.print(acceleration.y());
+  Serial.print("\tZ: ");
+  Serial.print(acceleration.z());
+  Serial.println("");
   delay(100);
 }
