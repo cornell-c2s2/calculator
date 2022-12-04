@@ -3,7 +3,7 @@
 #include <StateFieldRegistry.hpp>
 
 IMUTask::IMUTask(SFR& sfr) : ControlTask(sfr) {
-  Adafruit_BNO055 bno = Adafruit_BNO055(55);
+  bno = Adafruit_BNO055(55);
 };
 
 void IMUTask::setup() {
@@ -40,6 +40,10 @@ void IMUTask::execute() {
   Serial.print("\tZ: ");
   Serial.print(event.orientation.z, 4);
   Serial.println("");
+
+  sfr_.imu_orientation[0] = event.orientation.x;
+  sfr_.imu_orientation[1] = event.orientation.y;
+  sfr_.imu_orientation[2] = event.orientation.z;
   
   delay(100);
 };
